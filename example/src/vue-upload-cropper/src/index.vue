@@ -111,6 +111,7 @@
           dialogVisible: false
         },
         cropperOpts: Object.assign({}, {
+          height: 300, // 默认裁剪框高度，单位 px
           img: '', // 裁剪图片的地址
           outputSize: 1, // 裁剪生成图片的质量
           outputType: 'jpeg', // 裁剪生成图片的格式
@@ -314,7 +315,7 @@
 
           <el-dialog title='图片裁剪' width='80%' center
             visible={ this.showCropperDialog } { ...{ on: { 'update:visible': val => { this.showCropperDialog = val } }}}>
-            <vue-cropper { ...cropperData }></vue-cropper>
+            <vue-cropper { ...{ style: { height: this.cropperOpts.height + 'px' } }} { ...cropperData }></vue-cropper>
             <span slot='footer' class='dialog-footer'>
               <el-button { ...{ on: { click: this.cancelCropper }}}>取 消</el-button>
               <el-button type='primary' { ...{ on: { click: this.confirmCropper }}}>确 定</el-button>
@@ -327,10 +328,6 @@
 </script>
 
 <style>
-  .vue-cropper {
-    height: 300px;
-  }
-
   /* 是否显示上传图片按钮 */
   .hide-upload-btn .el-upload {
     display: none;
@@ -350,4 +347,3 @@
     max-height: 100%;
   }
 </style>
-

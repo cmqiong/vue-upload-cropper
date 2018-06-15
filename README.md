@@ -29,6 +29,7 @@ Vue.component('upload-cropper', UploadCropper)
   :limitSize="1024"              // 限制上传文件大小，单位 kb
   :fileList="yourInitListData"   // 用来初始化绑定数据
   :cropper="{                    // 一般情况下，只需设置下面几个，其它详细说明见下面文档
+    height: 300,         // 裁剪组件背景区域的高度，单位 px，不写默认 300
     autoCrop: true,      // 是否默认初始化裁剪框
     autoCropWidth: 300,  // 初始化裁剪框宽度，单位 px
     autoCropHeight: 300, // 初始化裁剪框高度，单位 px

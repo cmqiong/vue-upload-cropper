@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
+  <div class="app">
     <upload-cropper
-      :limit="2"
+      :limit="3"
       :limitSize="1024"
       :on-change="handleOnChange"
       :http-request="handleHttpRequest"
@@ -10,17 +10,18 @@
       :on-remove="handleRemove"
       :fileList="fileList1"
       :cropper="{
+        height: 300,
         autoCrop: true,
-        autoCropWidth: 200,
-        autoCropHeight: 300,
+        autoCropWidth: 300,
+        autoCropHeight: 200,
         fixed: true,
-        fixedNumber: [2, 3]
+        fixedNumber: [3, 2]
       }"></upload-cropper>
 
     <!-- 确认上传 -->
     <el-button @click="" style="margin-top:10px;">取 消</el-button>
     <el-button type="primary" @click="postForm()" style="margin-top:10px;">上传</el-button>
-    <el-button type="primary" @click="getUploadData()" style="margin-top:10px;">log 打印表单数据</el-button>
+    <el-button type="primary" @click="getUploadData()" style="margin-top:10px;">console.log(表单数据)</el-button>
   </div>
 </template>
 
@@ -124,7 +125,7 @@
 </script>
 
 <style>
-#app {
+.app {
   margin-left: 20px;
   margin-top: 60px;
 }
