@@ -1,6 +1,11 @@
 ## ImageCropper
 > 结合 element-ui upload + vue-cropper 进行图片初始化渲染，图片上传裁剪的封装
 
+## Notices
+使用条件：
+- 使用 elementUI
+- 编译环境安装并配置 babel-plugin-transform-vue-jsx，babel-plugin-syntax-jsx
+
 ## Installation
 ```shell
 npm i vue-upload-cropper
