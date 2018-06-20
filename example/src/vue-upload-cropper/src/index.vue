@@ -219,12 +219,15 @@
       },
       // 确认图片裁剪
       confirmCropper() {
-        const cropperComponent = this.getCropperComponent()
-        if (cropperComponent) {
-          cropperComponent && cropperComponent.startCrop() // start
-          this.outputCropResult()
-        } else {
-          return
+        // 防止重复点击确定按钮导致重复绑定数据
+        if(this.showCropperDialog) {
+          const cropperComponent = this.getCropperComponent()
+          if (cropperComponent) {
+            cropperComponent && cropperComponent.startCrop() // start
+            this.outputCropResult()
+          } else {
+            return
+          }
         }
       },
       // 输出裁剪结果
@@ -249,10 +252,10 @@
             console.error(err)
             return
           }
-          _this.getUploadComponent().uploadFiles.push(file)
+          _this.showCropperDialog = false // 关闭裁剪弹窗
+          _this.showCropperDialog && _this.getUploadComponent().uploadFiles.push(file)
           _this.fileListCopy.push(file)
           _this.handleChange(file, _this.fileListCopy)
-          _this.showCropperDialog = false // 关闭裁剪弹窗
         })
       }
     },

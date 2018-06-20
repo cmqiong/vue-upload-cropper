@@ -15,5 +15,4 @@ yarn-error.log
 *.njsproj
 *.sln
 
-dist
-index.html
+example/dist

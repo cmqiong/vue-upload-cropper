@@ -1,5 +1,8 @@
-## ImageCropper
+## vue-upload-cropper
 > 结合 element-ui upload + vue-cropper 进行图片初始化渲染，图片上传裁剪的封装
+
+## Demo
+https://cmqiong.github.io/vue-upload-cropper/example
 
 ## Notices
 使用条件：
@@ -46,7 +49,7 @@ Vue.component('upload-cropper', UploadCropper)
 ### Attribute
 - 概述：与 ELUpload 的不同：不支持文件多选，不支持拖拽上传。增加几个新属性。其它用法与 ELUpload 同。
 
-  - [ELUpload 其它参数信息在此](https://element.faas.ele.me/#/zh-CN/component/upload)
+  - [ELUpload 其它参数信息戳这里](https://element.faas.ele.me/#/zh-CN/component/upload)
 
 - 本插件新增属性：
 
