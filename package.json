@@ -1,12 +1,12 @@
 {
   "name": "vue-upload-cropper",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "整合了一些常用的表单验证正则规则，返回 elementUI Form 的表单验证规则",
   "dependencies": {
     "vue-cropper": "^0.2.9"
   },
   "scripts": {
-    "publish": "standard-version"
+    "publish": "standard-version -r patch"
   },
   "main": "./index.js",
   "repository": {
