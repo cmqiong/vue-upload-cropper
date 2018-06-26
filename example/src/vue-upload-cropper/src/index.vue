@@ -139,7 +139,7 @@
     methods: {
       handleHttpRequest(options) {
         const ajax = this.method === 'put' ? putAjax : postAjax
-        return this.httpRequest(options, ajax)
+        return this.httpRequest ? this.httpRequest(options, ajax) : ajax(options)
       },
       getUploadComponent() {
         return this.$refs[this.refName]

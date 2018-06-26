@@ -26,6 +26,8 @@
 </template>
 
 <script>
+  // import axios from 'axios'
+
   export default {
     name: 'exampleUploadCropper',
     data() {
@@ -54,7 +56,7 @@
       },
       handleHttpRequest(options, ajax) {
         // --------------
-        // 此处可用此方法动态修改请求 options，默认使用 ajax 发送请求，但只限于 form-data 形式表单提交
+        // 此处可用此方法动态修改请求 options，默认使用 ajax 发送请求，但只限于 form-data 形式表单 post|put 提交
         // options.action = '1231231'
         // options.headers = {
         //   'Accept': 'application/json',
@@ -65,17 +67,23 @@
 
         // ---------------
         // 若要自定义发送请求，此处一定要是 Promise 类的异步函数，才会执行 onSuccess 等回调
+        // 此处以 axios 发送请求举例
         return new Promise((resolve, reject) => {
           // ---------
-          // 进度条，未完待续....
-          // let idx = null
+          // 自定义请求的进度条
           // this.fileList1.forEach((item, index) => {
           //   if (item.uid === options.file.uid) {
-          //     item.status = 'uploading'
-          //     item.percentage = 50
-          //     idx = index
-          //     console.log(idx)
-          //     return
+          //     axios.post('https://a76a9787-346f-4247-83df-3c735332f3a2.mock.pstmn.io/create', {}, {
+          //       onUploadProgress: progressEvent => {
+          //         var complete = (progressEvent.loaded / progressEvent.total * 100 | 0) + '%'
+          //         item.status = 'uploading'
+          //         item.percentage = complete || 0
+          //         console.log('上传进度：', complete)
+          //       }
+          //     }).then(() => {
+          //       console.log('上传成功')
+          //       resolve()
+          //     })
           //   }
           // })
           // ---------
