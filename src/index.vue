@@ -111,6 +111,7 @@
           dialogVisible: false
         },
         cropperOpts: Object.assign({}, {
+          height: 300, // 默认裁剪框高度，单位 px
           img: '', // 裁剪图片的地址
           outputSize: 1, // 裁剪生成图片的质量
           outputType: 'jpeg', // 裁剪生成图片的格式
@@ -138,7 +139,7 @@
     methods: {
       handleHttpRequest(options) {
         const ajax = this.method === 'put' ? putAjax : postAjax
-        return this.httpRequest(options, ajax)
+        return this.httpRequest ? this.httpRequest(options, ajax) : ajax(options)
       },
       getUploadComponent() {
         return this.$refs[this.refName]
@@ -218,12 +219,15 @@
       },
       // 确认图片裁剪
       confirmCropper() {
-        const cropperComponent = this.getCropperComponent()
-        if (cropperComponent) {
-          cropperComponent && cropperComponent.startCrop() // start
-          this.outputCropResult()
-        } else {
-          return
+        // 防止重复点击确定按钮导致重复绑定数据
+        if(this.showCropperDialog) {
+          const cropperComponent = this.getCropperComponent()
+          if (cropperComponent) {
+            cropperComponent && cropperComponent.startCrop() // start
+            this.outputCropResult()
+          } else {
+            return
+          }
         }
       },
       // 输出裁剪结果
@@ -248,10 +252,10 @@
             console.error(err)
             return
           }
-          _this.getUploadComponent().uploadFiles.push(file)
+          _this.showCropperDialog = false // 关闭裁剪弹窗
+          _this.showCropperDialog && _this.getUploadComponent().uploadFiles.push(file)
           _this.fileListCopy.push(file)
           _this.handleChange(file, _this.fileListCopy)
-          _this.showCropperDialog = false // 关闭裁剪弹窗
         })
       }
     },
@@ -314,7 +318,7 @@
 
           <el-dialog title='图片裁剪' width='80%' center
             visible={ this.showCropperDialog } { ...{ on: { 'update:visible': val => { this.showCropperDialog = val } }}}>
-            <vue-cropper { ...cropperData }></vue-cropper>
+            <vue-cropper { ...{ style: { height: this.cropperOpts.height + 'px' } }} { ...cropperData }></vue-cropper>
             <span slot='footer' class='dialog-footer'>
               <el-button { ...{ on: { click: this.cancelCropper }}}>取 消</el-button>
               <el-button type='primary' { ...{ on: { click: this.confirmCropper }}}>确 定</el-button>
@@ -327,7 +331,22 @@
 </script>
 
 <style>
-  .vue-cropper {
-    height: 300px;
+  /* 是否显示上传图片按钮 */
+  .hide-upload-btn .el-upload {
+    display: none;
+  }
+  .upload-cropper .el-upload-list--picture-card{
+    display: inline-flex;
+  }
+  .upload-cropper .el-upload-list--picture-card .el-upload-list__item{
+    display: inline-flex;
+    align-items: center;
+    justify-content:center;
+  }
+  .upload-cropper .el-upload-list--picture-card .el-upload-list__item-thumbnail{
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
   }
 </style>

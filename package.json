@@ -5,6 +5,9 @@
   "dependencies": {
     "vue-cropper": "^0.2.9"
   },
+  "scripts": {
+    "publish": "standard-version"
+  },
   "main": "./index.js",
   "repository": {
     "type": "git",
